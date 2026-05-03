@@ -1,0 +1,551 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:13px}
+.w{padding:.75rem 0}
+h1{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.sub{font-size:11px;color:var(--color-text-secondary);margin-bottom:1rem}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1rem}
+.tab{padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:11px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .12s}
+.tab.on{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.sec{display:none}.sec.on{display:block}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px}
+.bh{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.bd{font-size:11px;color:var(--color-text-secondary);font-family:var(--font-sans);line-height:1.5;margin-bottom:6px}
+.r{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.c{background:var(--color-background-secondary);color:var(--color-text-primary);padding:2px 7px;border-radius:4px;font-family:var(--font-mono);white-space:nowrap;flex-shrink:0;font-size:11px}
+.d{color:var(--color-text-secondary);font-size:11.5px;line-height:1.5}
+.note{background:var(--color-background-warning);border-left:3px solid var(--color-text-warning);padding:6px 10px;border-radius:0 4px 4px 0;font-size:11px;color:var(--color-text-primary);margin-top:6px;line-height:1.5}
+.info{background:var(--color-background-info);border-left:3px solid var(--color-text-info);padding:6px 10px;border-radius:0 4px 4px 0;font-size:11px;color:var(--color-text-primary);margin-top:6px;line-height:1.5}
+.ok{background:var(--color-background-success);border-left:3px solid var(--color-text-success);padding:6px 10px;border-radius:0 4px 4px 0;font-size:11px;color:var(--color-text-primary);margin-top:6px;line-height:1.5}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+table.t{width:100%;border-collapse:collapse;font-size:11px}
+table.t th{color:var(--color-text-secondary);font-weight:500;text-align:left;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+table.t td{padding:3px 0;color:var(--color-text-primary);vertical-align:top;border-bottom:0.5px solid var(--color-border-tertiary)}
+table.t td:first-child{color:var(--color-text-secondary);padding-right:8px;white-space:nowrap;font-family:var(--font-mono);font-size:10.5px}
+.badge{font-size:10px;padding:1px 6px;border-radius:var(--border-radius-md);font-weight:500}
+.bi{background:var(--color-background-info);color:var(--color-text-info)}
+.bw{background:var(--color-background-warning);color:var(--color-text-warning)}
+.bs{background:var(--color-background-success);color:var(--color-text-success)}
+.br{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bp{background:#EEEDFE;color:#3C3489}
+</style>
+<div class="w">
+<h2 class="sr-only">Fiche bilan Linux complète — 9 modules cours Stella Roulière</h2>
+<h1>Fiche bilan Linux</h1>
+<p class="sub">9 modules — cours Stella Roulière · ING2030</p>
+
+<div class="tabs">
+  <button class="tab on" onclick="s('m1',this)">1 · Connexions</button>
+  <button class="tab" onclick="s('m2',this)">2 · Commandes</button>
+  <button class="tab" onclick="s('m3',this)">3 · Arborescence</button>
+  <button class="tab" onclick="s('m4',this)">4 · Texte</button>
+  <button class="tab" onclick="s('m5',this)">5 · Recherche</button>
+  <button class="tab" onclick="s('m6',this)">6 · Archives</button>
+  <button class="tab" onclick="s('m7',this)">7 · Utilisateurs</button>
+  <button class="tab" onclick="s('m8',this)">8 · Permissions</button>
+  <button class="tab" onclick="s('m9',this)">9 · Stockage</button>
+</div>
+
+<!-- MODULE 1 -->
+<div id="m1" class="sec on">
+  <div class="block">
+    <div class="bh">Méthodes de connexion <span class="badge bi">connexion</span></div>
+    <div class="r"><span class="c">ssh user@ip</span><span class="d">Connexion distante sécurisée — ne jamais se connecter en root par SSH par défaut</span></div>
+    <div class="r"><span class="c">passwd</span><span class="d">Changer son mot de passe (rien ne s'affiche à la saisie)</span></div>
+    <div class="r"><span class="c">exit / logout / Ctrl+D</span><span class="d">Déconnexion (fermeture de session bash)</span></div>
+    <div class="note">Connexion GUI : impossible de se connecter en root via l'interface graphique.</div>
+  </div>
+  <div class="block">
+    <div class="bh">Infos de session</div>
+    <table class="t">
+      <tr><th>Commande</th><th>Affiche</th></tr>
+      <tr><td>tty</td><td>Terminal associé au processus courant (ex : /dev/pts/4)</td></tr>
+      <tr><td>who</td><td>Utilisateurs connectés, terminal, heure, IP de connexion</td></tr>
+      <tr><td>id</td><td>UID, GID, groupes secondaires de l'utilisateur courant</td></tr>
+      <tr><td>logname</td><td>Nom de connexion de l'utilisateur actuel</td></tr>
+    </table>
+    <div class="info">UID=0 GID=0 → root (superuser). UID/GID 1-999 → daemons système. UID/GID &gt;1000 → utilisateurs normaux.</div>
+  </div>
+  <div class="block">
+    <div class="bh">Processus & services <span class="badge bw">exam</span></div>
+    <div class="r"><span class="c">systemctl status ssh</span><span class="d">Statut du service SSH + Main PID affiché</span></div>
+    <div class="r"><span class="c">ps aux | grep sshd</span><span class="d">Trouver les PID de ses sessions SSH</span></div>
+    <div class="r"><span class="c">kill &lt;PID&gt;</span><span class="d">Stopper un processus par son PID</span></div>
+    <div class="r"><span class="c">journalctl | grep user</span><span class="d">Rechercher les logs journald d'un utilisateur</span></div>
+    <div class="r"><span class="c">history</span><span class="d">Afficher l'historique de toutes ses commandes</span></div>
+  </div>
+</div>
+
+<!-- MODULE 2 -->
+<div id="m2" class="sec">
+  <div class="block">
+    <div class="bh">Chemins absolus vs relatifs <span class="badge bi">concept clé</span></div>
+    <table class="t">
+      <tr><th></th><th>Absolu</th><th>Relatif</th></tr>
+      <tr><td>Point de départ</td><td>Racine /</td><td>Répertoire courant (.)</td></tr>
+      <tr><td>Commence par</td><td>/</td><td>Nom, ./ ou ../</td></tr>
+      <tr><td>Exemple</td><td>/home/stella/doc.pdf</td><td>doc.pdf ou ../doc.pdf</td></tr>
+      <tr><td>Portabilité</td><td>Valide partout</td><td>Dépend du contexte</td></tr>
+    </table>
+    <div class="info">. = répertoire courant · .. = répertoire parent</div>
+  </div>
+  <div class="block">
+    <div class="bh">Commandes essentielles</div>
+    <div class="r"><span class="c">pwd</span><span class="d">Affiche le chemin absolu du répertoire courant</span></div>
+    <div class="r"><span class="c">cd /chemin</span><span class="d">Change de répertoire (cd ~ = home, cd - = précédent)</span></div>
+    <div class="r"><span class="c">ls -la</span><span class="d">Liste tout (fichiers cachés inclus) avec détails</span></div>
+    <div class="r"><span class="c">ls -lh</span><span class="d">Tailles lisibles (Ko, Mo)</span></div>
+    <div class="r"><span class="c">mkdir -p dir/sous/dir</span><span class="d">Crée l'arborescence complète en une commande</span></div>
+    <div class="r"><span class="c">mkdir a b c</span><span class="d">Crée plusieurs dossiers en une commande</span></div>
+    <div class="r"><span class="c">touch f1 f2 f3</span><span class="d">Crée plusieurs fichiers vides en une commande</span></div>
+    <div class="r"><span class="c">cp -r src/ dest/</span><span class="d">Copie récursive d'un répertoire</span></div>
+    <div class="r"><span class="c">mv src dest</span><span class="d">Déplace ou renomme</span></div>
+    <div class="r"><span class="c">rm -rf dir/</span><span class="d">Supprime un répertoire et son contenu (dangereux !)</span></div>
+    <div class="r"><span class="c">file fichier</span><span class="d">Identifie le type d'un fichier</span></div>
+    <div class="r"><span class="c">realpath dir</span><span class="d">Affiche le chemin absolu</span></div>
+  </div>
+  <div class="block">
+    <div class="bh">Types de fichiers (ls -l)</div>
+    <table class="t">
+      <tr><th>Lettre</th><th>Type</th></tr>
+      <tr><td>-</td><td>Fichier ordinaire (texte, script, binaire)</td></tr>
+      <tr><td>d</td><td>Répertoire</td></tr>
+      <tr><td>l</td><td>Lien symbolique</td></tr>
+      <tr><td>b / c</td><td>Fichier spécial (périphérique bloc / caractère)</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <div class="bh">Métacaractères</div>
+    <table class="t">
+      <tr><th>Symbole</th><th>Signification</th><th>Exemple</th></tr>
+      <tr><td>*</td><td>N'importe quelle chaîne (0 ou +)</td><td>*.conf = tous les .conf</td></tr>
+      <tr><td>?</td><td>N'importe quel caractère unique</td><td>f?.txt = fa.txt, fb.txt…</td></tr>
+      <tr><td>[abc]</td><td>Un caractère parmi la liste</td><td>[0-9] = un chiffre</td></tr>
+      <tr><td>[^abc]</td><td>Tout sauf les caractères listés</td><td>[^aei] = pas une voyelle</td></tr>
+      <tr><td>{a,b,c}</td><td>Choix parmi les expressions</td><td>{sh,bash} = sh ou bash</td></tr>
+      <tr><td>$VAR</td><td>Valeur d'une variable</td><td>$HOME, $USER</td></tr>
+      <tr><td>'…'</td><td>Citation simple : aucune interprétation</td><td>'$USER' = littéral</td></tr>
+      <tr><td>"…"</td><td>Citation double : variables interprétées</td><td>"Bonjour $USER"</td></tr>
+    </table>
+    <div class="info">Nommage : Linux est sensible à la casse. Fichiers cachés = nom commence par un point. Extension non obligatoire.</div>
+  </div>
+</div>
+
+<!-- MODULE 3 -->
+<div id="m3" class="sec">
+  <div class="block">
+    <div class="bh">Arborescence FHS <span class="badge bi">Filesystem Hierarchy Standard</span></div>
+    <table class="t">
+      <tr><th>Répertoire</th><th>Rôle</th></tr>
+      <tr><td>/</td><td>Racine — équivalent de C:\ sous Windows</td></tr>
+      <tr><td>/etc</td><td>Fichiers de configuration système</td></tr>
+      <tr><td>/bin</td><td>Commandes essentielles du système</td></tr>
+      <tr><td>/sbin</td><td>Commandes d'administration système</td></tr>
+      <tr><td>/boot</td><td>Noyau et fichiers de démarrage</td></tr>
+      <tr><td>/dev</td><td>Fichiers de périphériques (sda, tty…)</td></tr>
+      <tr><td>/home</td><td>Répertoires personnels des utilisateurs</td></tr>
+      <tr><td>/lib /lib64</td><td>Bibliothèques partagées</td></tr>
+      <tr><td>/media</td><td>Points de montage supports amovibles (USB, CD…)</td></tr>
+      <tr><td>/mnt</td><td>Montages temporaires</td></tr>
+      <tr><td>/opt</td><td>Logiciels optionnels / tiers</td></tr>
+      <tr><td>/proc</td><td>Système de fichiers virtuel — infos processus en temps réel</td></tr>
+      <tr><td>/tmp</td><td>Fichiers temporaires</td></tr>
+      <tr><td>/usr</td><td>Programmes et fichiers partagés (/usr/bin, /usr/lib…)</td></tr>
+      <tr><td>/var</td><td>Fichiers variables : logs, bases de données…</td></tr>
+    </table>
+    <div class="r" style="margin-top:8px"><span class="c">tree</span><span class="d">Affiche l'arborescence depuis le répertoire courant</span></div>
+  </div>
+  <div class="block">
+    <div class="bh">Liens — syntaxe</div>
+    <div class="r"><span class="c">ln source lien</span><span class="d">Lien physique (hard link)</span></div>
+    <div class="r"><span class="c">ln -s source lien</span><span class="d">Lien symbolique (symlink)</span></div>
+    <div class="r"><span class="c">ls -li</span><span class="d">Affiche les numéros d'inode — hard links = même inode</span></div>
+  </div>
+  <div class="g2">
+    <div class="block">
+      <div class="bh">Lien physique</div>
+      <div class="bd">Partage le même inode que l'original. Modification ou suppression de l'un n'affecte pas l'autre.</div>
+      <div class="ok">Si l'original est supprimé → le lien physique fonctionne encore</div>
+      <div class="note">Limité au même système de fichiers. Interdit sur les répertoires.</div>
+    </div>
+    <div class="block">
+      <div class="bh">Lien symbolique</div>
+      <div class="bd">Pointe vers un chemin. Peut traverser les systèmes de fichiers et lier des répertoires.</div>
+      <div class="note">Si l'original est supprimé → lien cassé (dangling symlink)</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 4 -->
+<div id="m4" class="sec">
+  <div class="block">
+    <div class="bh">cat <span class="badge bi">affichage & création</span></div>
+    <div class="r"><span class="c">cat fichier</span><span class="d">Afficher le contenu</span></div>
+    <div class="r"><span class="c">cat -n fichier</span><span class="d">Afficher avec numéros de lignes</span></div>
+    <div class="r"><span class="c">cat f1 f2</span><span class="d">Concaténer et afficher plusieurs fichiers</span></div>
+    <div class="r"><span class="c">cat f1 f2 > fusion.txt</span><span class="d">Concaténer vers un nouveau fichier</span></div>
+    <div class="r"><span class="c">cat > fichier</span><span class="d">Créer / écraser un fichier (Ctrl+D pour finir)</span></div>
+    <div class="r"><span class="c">cat >> fichier</span><span class="d">Ajouter à la fin d'un fichier</span></div>
+  </div>
+  <div class="g2">
+    <div class="block">
+      <div class="bh">more / less</div>
+      <div class="bd">Affichage paginé d'un fichier volumineux.</div>
+      <table class="t">
+        <tr><th>Touche</th><th>Action</th></tr>
+        <tr><td>Espace</td><td>Page suivante</td></tr>
+        <tr><td>Entrée</td><td>Ligne suivante</td></tr>
+        <tr><td>b</td><td>Page précédente (less)</td></tr>
+        <tr><td>/motif</td><td>Rechercher (less)</td></tr>
+        <tr><td>q</td><td>Quitter</td></tr>
+        <tr><td>Echap :</td><td>Exécuter commande dans less</td></tr>
+      </table>
+      <div class="info">less &gt; more : navigation bidirectionnelle, recherche, mode tail -f avec +F</div>
+    </div>
+    <div class="block">
+      <div class="bh">head / tail / wc / diff</div>
+      <div class="r"><span class="c">head -n 5 f</span><span class="d">5 premières lignes</span></div>
+      <div class="r"><span class="c">tail -n 3 f</span><span class="d">3 dernières lignes</span></div>
+      <div class="r"><span class="c">tail -f /var/log/syslog</span><span class="d">Suivi temps réel d'un log</span></div>
+      <div class="r"><span class="c">wc fichier</span><span class="d">Lignes / mots / caractères</span></div>
+      <div class="r"><span class="c">wc -l *.conf</span><span class="d">Nombre de lignes par fichier</span></div>
+      <div class="r"><span class="c">diff f1 f2</span><span class="d">Comparer deux fichiers (&lt; = f1, &gt; = f2)</span></div>
+      <div class="r"><span class="c">diff -u f1 f2</span><span class="d">Format unifié (style git)</span></div>
+      <div class="r"><span class="c">diff -r dir1 dir2</span><span class="d">Comparaison récursive de dossiers</span></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">Redirecteurs & flux</div>
+    <table class="t">
+      <tr><th>Flux</th><th>Numéro</th><th>Par défaut</th></tr>
+      <tr><td>stdin</td><td>0</td><td>Clavier</td></tr>
+      <tr><td>stdout</td><td>1</td><td>Écran</td></tr>
+      <tr><td>stderr</td><td>2</td><td>Écran</td></tr>
+    </table>
+    <div style="margin-top:8px">
+    <div class="r"><span class="c">cmd &gt; fichier</span><span class="d">Redirige stdout vers fichier (écrase)</span></div>
+    <div class="r"><span class="c">cmd &gt;&gt; fichier</span><span class="d">Redirige stdout (ajoute à la fin)</span></div>
+    <div class="r"><span class="c">cmd 2&gt;/dev/null</span><span class="d">Supprime les erreurs (trou noir)</span></div>
+    <div class="r"><span class="c">cmd 2&gt;&amp;1</span><span class="d">Fusionne stderr dans stdout</span></div>
+    <div class="r"><span class="c">cmd &amp;&gt; fichier</span><span class="d">Redirige stdout ET stderr (bash)</span></div>
+    <div class="r"><span class="c">cmd | tee fichier</span><span class="d">Affiche ET enregistre dans un fichier</span></div>
+    <div class="r"><span class="c">cmd | tee -a fichier</span><span class="d">Idem mais ajoute à la fin</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 5 -->
+<div id="m5" class="sec">
+  <div class="block">
+    <div class="bh">find <span class="badge bi">recherche temps réel</span></div>
+    <div class="bd">Syntaxe : <code>find &lt;chemin&gt; &lt;options&gt;</code></div>
+    <table class="t">
+      <tr><th>Option</th><th>Description</th><th>Exemple</th></tr>
+      <tr><td>-name "*.conf"</td><td>Par nom (sensible casse)</td><td>find . -name "*.conf"</td></tr>
+      <tr><td>-iname</td><td>Par nom (insensible casse)</td><td></td></tr>
+      <tr><td>-type f / d</td><td>Fichier / répertoire</td><td>find / -type d -user stella</td></tr>
+      <tr><td>-user nom</td><td>Par propriétaire</td><td>find / -type d -user buron</td></tr>
+      <tr><td>-size +10M</td><td>Taille &gt; 10 Mo</td><td>find D:\ -size +10M</td></tr>
+      <tr><td>-mtime -7</td><td>Modifié il y a moins de 7j</td><td></td></tr>
+      <tr><td>-perm 644</td><td>Par permissions</td><td></td></tr>
+      <tr><td>-empty</td><td>Fichiers/dossiers vides</td><td></td></tr>
+      <tr><td>-not -name</td><td>Négation</td><td>find . -not -name "*.conf"</td></tr>
+      <tr><td>-exec cmd {} \;</td><td>Exécuter cmd sur chaque résultat</td><td>-exec chmod 644 {} \;</td></tr>
+      <tr><td>-ok cmd {} \;</td><td>Idem avec confirmation</td><td></td></tr>
+    </table>
+    <div class="note">Toujours ajouter 2&gt;/dev/null à la fin pour ignorer les erreurs de permission : <code>find / -type d -user buron 2&gt;/dev/null</code></div>
+    <div style="margin-top:8px">
+    <div class="r"><span class="c">find . -name "*.conf" | wc -l</span><span class="d">Compter le nombre de fichiers .conf</span></div>
+    <div class="r"><span class="c">find . -name "*.conf" -mtime -7 | xargs grep -l "vlan"</span><span class="d">find + grep combinés</span></div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="block">
+      <div class="bh">grep <span class="badge bi">Global Regex Print</span></div>
+      <div class="bd">Syntaxe : <code>grep [options] motif fichier</code></div>
+      <table class="t">
+        <tr><th>Option</th><th>Effet</th></tr>
+        <tr><td>-i</td><td>Insensible à la casse</td></tr>
+        <tr><td>-r / -R</td><td>Recherche récursive</td></tr>
+        <tr><td>-n</td><td>Numéros de ligne</td></tr>
+        <tr><td>-v</td><td>Lignes ne contenant PAS le motif</td></tr>
+        <tr><td>-c</td><td>Compte les occurrences</td></tr>
+        <tr><td>-l</td><td>Noms des fichiers seulement</td></tr>
+        <tr><td>-w</td><td>Mot entier uniquement</td></tr>
+        <tr><td>-E</td><td>Expression régulière étendue</td></tr>
+        <tr><td>-A N / -B N</td><td>N lignes après/avant le résultat</td></tr>
+      </table>
+      <div class="r" style="margin-top:6px"><span class="c">grep -i "^hostname" *.conf</span><span class="d">Lignes commençant par hostname</span></div>
+      <div class="r"><span class="c">grep -rEi "interface|ip address" .</span><span class="d">Plusieurs motifs (alternance)</span></div>
+    </div>
+    <div class="block">
+      <div class="bh">rg (ripgrep) & locate</div>
+      <div class="bd">rg = grep plus rapide, récursif par défaut, respecte .gitignore</div>
+      <div class="r"><span class="c">rg motif</span><span class="d">Recherche récursive depuis le dossier courant</span></div>
+      <div class="r"><span class="c">rg -n motif *.conf</span><span class="d">Avec numéros de ligne</span></div>
+      <div class="r"><span class="c">rg -t py motif</span><span class="d">Limité aux fichiers Python</span></div>
+      <div class="r"><span class="c">rg --hidden motif</span><span class="d">Inclure fichiers cachés</span></div>
+      <div style="margin-top:8px;border-top:0.5px solid var(--color-border-tertiary);padding-top:8px">
+      <div class="bd">locate = recherche ultra-rapide via base de données pré-générée</div>
+      <div class="r"><span class="c">locate "*.conf"</span><span class="d">Recherche dans la base</span></div>
+      <div class="r"><span class="c">sudo updatedb</span><span class="d">Mettre à jour la base de données</span></div>
+      <div class="r"><span class="c">locate -i motif</span><span class="d">Insensible à la casse</span></div>
+      <div class="r"><span class="c">locate -c motif</span><span class="d">Compter le nombre de résultats</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">Expressions régulières essentielles</div>
+    <table class="t">
+      <tr><th>Motif</th><th>Signification</th><th>Exemple</th></tr>
+      <tr><td>^chaîne</td><td>Début de ligne</td><td>^hostname</td></tr>
+      <tr><td>chaîne$</td><td>Fin de ligne</td><td>\.conf$</td></tr>
+      <tr><td>^$</td><td>Ligne vide</td><td></td></tr>
+      <tr><td>.</td><td>N'importe quel caractère</td><td></td></tr>
+      <tr><td>*</td><td>0 ou plus du char précédent</td><td>ab*c</td></tr>
+      <tr><td>[A-Za-z]</td><td>Une lettre quelconque</td><td></td></tr>
+      <tr><td>[0-9]{1,3}</td><td>1 à 3 chiffres</td><td>IP : [0-9]{1,3}\.</td></tr>
+      <tr><td>[^abc]</td><td>Tout sauf a, b, c</td><td></td></tr>
+    </table>
+    <div class="r" style="margin-top:6px"><span class="c">grep -rE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" *.conf</span><span class="d">Trouver les adresses IP</span></div>
+  </div>
+</div>
+
+<!-- MODULE 6 -->
+<div id="m6" class="sec">
+  <div class="block">
+    <div class="bh">tar — Archiver <span class="badge bi">options principales</span></div>
+    <table class="t">
+      <tr><th>Option</th><th>Rôle</th></tr>
+      <tr><td>-c</td><td>Créer une archive</td></tr>
+      <tr><td>-x</td><td>Extraire une archive</td></tr>
+      <tr><td>-t</td><td>Lister le contenu</td></tr>
+      <tr><td>-f archive</td><td>Spécifier le nom du fichier archive</td></tr>
+      <tr><td>-v</td><td>Mode verbeux</td></tr>
+      <tr><td>-z</td><td>Compression gzip (.tar.gz)</td></tr>
+      <tr><td>-j</td><td>Compression bzip2 (.tar.bz2)</td></tr>
+      <tr><td>-J</td><td>Compression xz (.tar.xz)</td></tr>
+      <tr><td>--exclude=motif</td><td>Exclure des fichiers/dossiers</td></tr>
+    </table>
+    <div style="margin-top:8px">
+    <div class="r"><span class="c">tar cf archive.tar ./</span><span class="d">Archiver sans compression</span></div>
+    <div class="r"><span class="c">tar czf archive.tar.gz ./</span><span class="d">Archiver + gzip</span></div>
+    <div class="r"><span class="c">tar cjf archive.tar.bz2 ./</span><span class="d">Archiver + bzip2</span></div>
+    <div class="r"><span class="c">tar cJf archive.tar.xz ./</span><span class="d">Archiver + xz (meilleure compression)</span></div>
+    <div class="r"><span class="c">tar xf archive.tar -C ~/dest/</span><span class="d">Extraire dans un répertoire spécifique</span></div>
+    <div class="r"><span class="c">tar cf arch.tar --exclude=~/Restaurations ~</span><span class="d">Exclure un dossier</span></div>
+    <div class="r"><span class="c">du -sh archive*</span><span class="d">Comparer les tailles (option -sh = lisible + total)</span></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">Comparaison des formats de compression</div>
+    <table class="t">
+      <tr><th>Format</th><th>Extension</th><th>Ratio</th><th>Vitesse compression</th><th>Décompression</th></tr>
+      <tr><td>gzip</td><td>.gz</td><td>Moyen</td><td>Très rapide</td><td>gunzip</td></tr>
+      <tr><td>bzip2</td><td>.bz2</td><td>Bon</td><td>Moyenne</td><td>bunzip2</td></tr>
+      <tr><td>xz</td><td>.xz</td><td>Excellent</td><td>Lente</td><td>unxz</td></tr>
+    </table>
+    <div class="note">Pour la décompression seule : gzip -d, bzip2 -d, xz -d · Option -k pour conserver l'original</div>
+  </div>
+</div>
+
+<!-- MODULE 7 -->
+<div id="m7" class="sec">
+  <div class="block">
+    <div class="bh">Fichiers système importants</div>
+    <table class="t">
+      <tr><th>Fichier</th><th>Contenu</th></tr>
+      <tr><td>/etc/passwd</td><td>Infos utilisateurs : login:x:UID:GID:commentaire:home:shell</td></tr>
+      <tr><td>/etc/shadow</td><td>Mots de passe chiffrés + politique d'expiration</td></tr>
+      <tr><td>/etc/group</td><td>Groupes : nom:mdp:GID:membres</td></tr>
+      <tr><td>/etc/gshadow</td><td>Mots de passe de groupes + administrateurs</td></tr>
+    </table>
+    <div class="info">root = UID 0 / GID 0 · Daemons = UID 1-999 · Utilisateurs normaux = UID &gt; 1000</div>
+  </div>
+  <div class="g2">
+    <div class="block">
+      <div class="bh">Gestion utilisateurs</div>
+      <div class="r"><span class="c">useradd -m nom</span><span class="d">Créer utilisateur avec son home</span></div>
+      <div class="r"><span class="c">passwd nom</span><span class="d">Définir/changer le mot de passe</span></div>
+      <div class="r"><span class="c">usermod -aG sudo nom</span><span class="d">Ajouter au groupe sudo</span></div>
+      <div class="r"><span class="c">usermod -L nom</span><span class="d">Désactiver un compte</span></div>
+      <div class="r"><span class="c">usermod -U nom</span><span class="d">Réactiver un compte</span></div>
+      <div class="r"><span class="c">userdel -r nom</span><span class="d">Supprimer utilisateur + son home</span></div>
+      <div class="r"><span class="c">chage -l nom</span><span class="d">Voir paramètres d'expiration</span></div>
+      <div class="r"><span class="c">chage nom</span><span class="d">Modifier expiration (interactif)</span></div>
+      <div class="r"><span class="c">chsh -s /bin/bash nom</span><span class="d">Changer le shell</span></div>
+      <div class="r"><span class="c">id nom</span><span class="d">Afficher uid/gid/groupes</span></div>
+    </div>
+    <div class="block">
+      <div class="bh">Gestion groupes</div>
+      <div class="r"><span class="c">groupadd nom</span><span class="d">Créer un groupe</span></div>
+      <div class="r"><span class="c">groupmod -n nouveau ancien</span><span class="d">Renommer un groupe</span></div>
+      <div class="r"><span class="c">groupdel nom</span><span class="d">Supprimer un groupe</span></div>
+      <div class="r"><span class="c">gpasswd -a user groupe</span><span class="d">Ajouter un membre</span></div>
+      <div class="r"><span class="c">gpasswd -d user groupe</span><span class="d">Retirer un membre</span></div>
+      <div class="r"><span class="c">groups nom</span><span class="d">Afficher les groupes d'un utilisateur</span></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">sudo</div>
+    <div class="r"><span class="c">sudo commande</span><span class="d">Exécuter avec droits root temporaires</span></div>
+    <div class="r"><span class="c">sudo visudo</span><span class="d">Éditer /etc/sudoers en toute sécurité</span></div>
+    <div class="note">Dans sudoers : <code>stella ALL=(ALL) NOPASSWD: ALL</code> → pas de mot de passe demandé</div>
+  </div>
+</div>
+
+<!-- MODULE 8 -->
+<div id="m8" class="sec">
+  <div class="block">
+    <div class="bh">Lecture des permissions (ls -l)</div>
+    <div style="font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);padding:8px 10px;border-radius:var(--border-radius-md);margin-bottom:8px">drwxr-xr-x 2 stella projet 4096 10 juil. 12:03 commun</div>
+    <table class="t">
+      <tr><td>d</td><td>Type : répertoire (- = fichier, l = lien)</td></tr>
+      <tr><td>rwx</td><td>Propriétaire : lecture + écriture + exécution</td></tr>
+      <tr><td>r-x</td><td>Groupe : lecture + exécution</td></tr>
+      <tr><td>r-x</td><td>Autres : lecture + exécution</td></tr>
+      <tr><td>2</td><td>Nombre de liens physiques</td></tr>
+      <tr><td>stella</td><td>Propriétaire</td></tr>
+      <tr><td>projet</td><td>Groupe propriétaire</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <div class="bh">chmod — valeurs numériques</div>
+    <table class="t">
+      <tr><th>Valeur</th><th>Permissions</th><th>Usage typique</th></tr>
+      <tr><td>600</td><td>rw------- (proprio seul)</td><td>clés SSH, confidentiel</td></tr>
+      <tr><td>640</td><td>rw-r----- (proprio+groupe r)</td><td>umask 027</td></tr>
+      <tr><td>644</td><td>rw-r--r-- (lecture tous)</td><td>fichiers web, configs</td></tr>
+      <tr><td>664</td><td>rw-rw-r-- (groupe écrit)</td><td>partagé dans groupe</td></tr>
+      <tr><td>755</td><td>rwxr-xr-x (script public)</td><td>scripts, répertoires</td></tr>
+      <tr><td>777</td><td>rwxrwxrwx (tous)</td><td>à éviter en prod</td></tr>
+    </table>
+    <div style="margin-top:8px">
+    <div class="r"><span class="c">chmod 644 fichier</span><span class="d">Notation numérique</span></div>
+    <div class="r"><span class="c">chmod u+x / a+rwx</span><span class="d">Notation symbolique (u=proprio, g=groupe, o=autres, a=tous)</span></div>
+    <div class="r"><span class="c">chmod -R 755 dossier/</span><span class="d">Récursif</span></div>
+    <div class="r"><span class="c">chown user:groupe fichier</span><span class="d">Changer proprio et groupe</span></div>
+    <div class="r"><span class="c">chgrp groupe fichier</span><span class="d">Changer uniquement le groupe</span></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">Droits spéciaux</div>
+    <table class="t">
+      <tr><th>Droit</th><th>Sur fichier</th><th>Sur répertoire</th><th>Commande</th></tr>
+      <tr><td>SetUID (SUID)</td><td>Exécuté avec droits du proprio (ex: passwd)</td><td>Ignoré</td><td>chmod u+s / chmod 4755</td></tr>
+      <tr><td>SetGID (SGID)</td><td>Exécuté avec droits du groupe</td><td>Nouveaux fichiers héritent du groupe du répertoire</td><td>chmod g+s / chmod 2775</td></tr>
+      <tr><td>Sticky bit</td><td>Pas d'effet</td><td>Seul le proprio peut supprimer ses propres fichiers</td><td>chmod +t / chmod 1777</td></tr>
+    </table>
+    <div class="note">ls -l affiche : s minuscule = droit x + SUID/SGID · S majuscule = pas de droit x · t = sticky bit</div>
+  </div>
+  <div class="block">
+    <div class="bh">umask</div>
+    <div class="bd">Définit les permissions par défaut à la création d'un fichier ou répertoire.<br>Calcul : permissions effectives = 666 (fichier) ou 777 (répertoire) − umask</div>
+    <table class="t">
+      <tr><th>umask</th><th>Fichier créé</th><th>Répertoire créé</th></tr>
+      <tr><td>022 (défaut)</td><td>644 (rw-r--r--)</td><td>755 (rwxr-xr-x)</td></tr>
+      <tr><td>027</td><td>640 (rw-r-----)</td><td>750 (rwxr-x---)</td></tr>
+    </table>
+    <div class="r" style="margin-top:6px"><span class="c">umask</span><span class="d">Afficher le masque courant</span></div>
+    <div class="r"><span class="c">umask 027</span><span class="d">Modifier temporairement</span></div>
+    <div class="info">Pour rendre permanent : ajouter <code>umask 027</code> dans ~/.bashrc</div>
+  </div>
+  <div class="block">
+    <div class="bh">ACL — Access Control Lists</div>
+    <div class="r"><span class="c">getfacl fichier</span><span class="d">Afficher les ACL détaillées d'un fichier</span></div>
+    <div class="r"><span class="c">setfacl -m u:user:r fichier</span><span class="d">Donner lecture à un utilisateur spécifique</span></div>
+    <div class="r"><span class="c">setfacl -m g:groupe:rwx fichier</span><span class="d">Donner droits à un groupe</span></div>
+    <div class="r"><span class="c">setfacl -R -m u:user:rwx dossier/</span><span class="d">Récursif sur tout le dossier</span></div>
+    <div class="r"><span class="c">setfacl -x u:user fichier</span><span class="d">Supprimer l'ACL d'un utilisateur</span></div>
+    <div class="r"><span class="c">setfacl -b fichier</span><span class="d">Supprimer toutes les ACL</span></div>
+    <div class="r"><span class="c">setfacl -d -m u:user:rwx dossier/</span><span class="d">ACL par défaut (héritée par nouveaux fichiers)</span></div>
+    <div class="note">apt install acl · Un + dans ls -l (ex: -rw-r--r--+) indique qu'une ACL est définie</div>
+  </div>
+</div>
+
+<!-- MODULE 9 -->
+<div id="m9" class="sec">
+  <div class="block">
+    <div class="bh">Disques & nommage Linux</div>
+    <table class="t">
+      <tr><td>/dev/sda</td><td>Premier disque SCSI/SATA</td></tr>
+      <tr><td>/dev/sdb</td><td>Deuxième disque</td></tr>
+      <tr><td>/dev/sda1</td><td>Première partition principale</td></tr>
+      <tr><td>/dev/sda5</td><td>Première partition logique (toujours ≥ 5)</td></tr>
+    </table>
+    <div class="info">Partitions 1-4 = primaires/étendue · Logiques = toujours à partir de 5</div>
+    <table class="t" style="margin-top:8px">
+      <tr><th>Format</th><th>Caractéristique</th></tr>
+      <tr><td>ext2</td><td>Premier FS Linux, sans journalisation</td></tr>
+      <tr><td>ext3</td><td>+ journalisation</td></tr>
+      <tr><td>ext4</td><td>Standard actuel — performant et robuste</td></tr>
+      <tr><td>XFS</td><td>Haute performance, grands volumes</td></tr>
+      <tr><td>Btrfs</td><td>Snapshots, compression, futur ext4</td></tr>
+    </table>
+  </div>
+  <div class="block">
+    <div class="bh">Commandes de base stockage</div>
+    <div class="r"><span class="c">lsblk</span><span class="d">Lister disques, partitions, volumes logiques</span></div>
+    <div class="r"><span class="c">fdisk -l /dev/sdb</span><span class="d">Lister les partitions d'un disque</span></div>
+    <div class="r"><span class="c">fdisk /dev/sdb</span><span class="d">Partitionner un disque (n=new, t=type, 8e=LVM, w=sauver)</span></div>
+    <div class="r"><span class="c">mkfs.ext4 /dev/sdb1</span><span class="d">Formater en ext4</span></div>
+    <div class="r"><span class="c">mount /dev/sdb1 /mnt/point</span><span class="d">Monter un volume</span></div>
+    <div class="r"><span class="c">umount /mnt/point</span><span class="d">Démonter un volume</span></div>
+    <div class="r"><span class="c">mount / findmnt</span><span class="d">Afficher tous les volumes montés</span></div>
+    <div class="r"><span class="c">df -h</span><span class="d">Espace disque utilisé/libre par volume</span></div>
+    <div class="r"><span class="c">du -sh /chemin</span><span class="d">Espace utilisé par un dossier</span></div>
+  </div>
+  <div class="block">
+    <div class="bh">fstab — montage automatique au démarrage</div>
+    <div class="bd">Fichier : /etc/fstab — géré par systemd au boot</div>
+    <div style="font-family:var(--font-mono);font-size:11px;background:var(--color-background-secondary);padding:6px 10px;border-radius:var(--border-radius-md);line-height:1.8">
+      /dev/antoine-vg/usr &nbsp;/usr &nbsp;ext4 &nbsp;defaults &nbsp;0 2
+    </div>
+    <div class="note">Colonnes : périphérique · point de montage · type FS · options · dump · fsck</div>
+    <div class="r" style="margin-top:6px"><span class="c">mount -o remount,rw /</span><span class="d">Remonter la racine en lecture/écriture</span></div>
+  </div>
+  <div class="block">
+    <div class="bh">LVM — Logical Volume Manager <span class="badge bp">ordre à retenir</span></div>
+    <table class="t">
+      <tr><th>Couche</th><th>Description</th><th>Commandes</th></tr>
+      <tr><td>PV (Physical Volume)</td><td>Disque/partition marqué pour LVM</td><td>pvcreate /dev/sdb1</td></tr>
+      <tr><td>VG (Volume Group)</td><td>Pool regroupant les PV</td><td>vgcreate nom /dev/sdb1<br>vgextend nom /dev/sdb1<br>vgdisplay / vgs</td></tr>
+      <tr><td>LV (Logical Volume)</td><td>Partition logique flexible</td><td>lvcreate -L 10G -n nom vg<br>lvextend -L +10G /dev/vg/lv<br>lvdisplay</td></tr>
+    </table>
+    <div class="note" style="margin-top:8px">Ordre LVM complet : fdisk → vgextend → lvextend → resize2fs → lvcreate → mkfs → mount</div>
+    <div style="margin-top:8px">
+    <div class="r"><span class="c">lvcreate -l 100%FREE -n usr antoine-vg</span><span class="d">Créer LV avec tout l'espace restant</span></div>
+    <div class="r"><span class="c">lvextend -L +10G /dev/antoine-vg/root</span><span class="d">Agrandir le volume logique</span></div>
+    <div class="r"><span class="c">resize2fs /dev/antoine-vg/root</span><span class="d">Redimensionner le FS après lvextend</span></div>
+    <div class="r"><span class="c">rsync -avx /usr/ /mnt/usr_new/</span><span class="d">Migrer les données vers le nouveau volume</span></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="bh">RAID 5</div>
+    <div class="bd">Min. 3 disques · Parité répartie · Capacité = (N−1) × taille d'un disque · Si 1 disque tombe en panne, reconstruction possible.</div>
+    <div class="r"><span class="c">apt install mdadm</span><span class="d">Installer l'outil RAID</span></div>
+    <div class="r"><span class="c">mdadm --create --verbose /dev/md0 --level=5 --raid-devices=3 /dev/sd[bcd]</span><span class="d">Créer le RAID 5</span></div>
+    <div class="r"><span class="c">mkfs.ext4 /dev/md0</span><span class="d">Formater le RAID</span></div>
+    <div class="r"><span class="c">mdadm --detail /dev/md0</span><span class="d">Vérifier l'état du RAID</span></div>
+    <div class="r"><span class="c">mdadm --detail --scan | tee -a /etc/mdadm/mdadm.conf</span><span class="d">Persistance du RAID au démarrage</span></div>
+  </div>
+  <div class="block">
+    <div class="bh">Superblock & outils</div>
+    <div class="r"><span class="c">dumpe2fs /dev/sda1</span><span class="d">Afficher les infos du superblock</span></div>
+    <div class="r"><span class="c">e2fsck -b 8193 /dev/sda1</span><span class="d">Restaurer depuis un superblock de secours</span></div>
+    <div class="r"><span class="c">tune2fs -L "BackupDrive" /dev/sda1</span><span class="d">Changer l'étiquette du volume</span></div>
+    <div class="r"><span class="c">resize2fs /dev/vg/lv</span><span class="d">Redimensionner le FS (après lvextend)</span></div>
+  </div>
+</div>
+
+</div>
+<script>
+function s(id, btn){
+  document.querySelectorAll('.sec').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
